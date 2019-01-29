@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        configureUIUpcoming()
+
         
         requestUpcomingMovies()
         requestPopularMovie()
@@ -109,11 +109,12 @@ class HomeViewController: UIViewController {
     
     func configureUI() {
         self.title = "\(category) 🎪"
+        self.title = "\(categoryUpcoming)"
        
     }
-    func configureUIUpcoming() {
-        self.title = "\(categoryUpcoming)"
-    }
+ //   func configureUIUpcoming() {
+  //      self.title = "\(categoryUpcoming)"
+   // }
     
     func configureCollectionView() {
         collectionView.delegate = self
