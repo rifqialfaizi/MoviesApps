@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieCell: UICollectionViewCell {
     
-    static let identifier = "MovieCell"
+    static let nibName = "MovieCell"
+    static let reusableIdentifier = "MovieCell"
     
     @IBOutlet weak var moviePosterImageView: UIImageView!
     
@@ -19,8 +21,10 @@ class MovieCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configure(with model: Movies) {
-        
+    func configure(with model: Movie) {
+        let posterImageUrl = "https://image.tmdb.org/t/p/w500/\(model.poster_path ?? "")"
+        let url = URL(string: posterImageUrl)
+        moviePosterImageView.kf.setImage(with: url)
     }
 
 }
