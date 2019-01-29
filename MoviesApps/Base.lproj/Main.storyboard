@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-993" y="545"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Category-->
         <scene sceneID="0NF-iS-pls">
             <objects>
                 <viewController id="tWg-bz-wna" customClass="HomeViewController" customModule="MoviesApps" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,8 +64,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="g1Y-pM-ukl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Zce-9a-L0z">
-                        <barButtonItem key="rightBarButtonItem" title="Category" id="fse-wg-duz"/>
+                    <navigationItem key="navigationItem" title="Category" id="Zce-9a-L0z">
+                        <barButtonItem key="rightBarButtonItem" title="Category" id="fse-wg-duz">
+                            <connections>
+                                <action selector="changeCategoryButton:" destination="tWg-bz-wna" id="beg-ke-Ilm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Nhh-av-Pse" id="9Re-UG-kIY"/>

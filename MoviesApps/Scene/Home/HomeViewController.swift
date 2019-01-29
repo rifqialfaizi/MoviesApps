@@ -25,6 +25,20 @@ class HomeViewController: UIViewController {
         configureCollectionView()
     }
 
+    // TODO: Tambahin action Button untuk merubah category lainnya yaitu Latest, Now Playing & Top Rated Movie
+    
+    @IBAction func changeCategoryButton(_ sender: Any) {
+        let alert = UIAlertController(title: "Choose Category", message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Popular", style: .default, handler: { _ in
+            self.requestPopularMovie()
+        }))
+        
+        self.present(alert, animated: true)
+    }
+    
+    // TODO: Tambahin request untuk Latest, Now Playing & Top Rated Movie
+    
     func requestPopularMovie() {
         DispatchQueue.global(qos: .background).async {
             self.service.fetchPopularMovie { movies, status in
