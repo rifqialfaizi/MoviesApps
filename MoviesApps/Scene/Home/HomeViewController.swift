@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
     // TODO: Tambahin action Button untuk merubah category lainnya yaitu Latest, Now Playing & Top Rated Movie
     
     @IBAction func changeCategoryButton(_ sender: Any) {
-        let alert = UIAlertController(title: "Category", message: "Choose Movies Category", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Choose Movies Category", message: "", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Popular", style: .default, handler: { _ in
             self.requestPopularMovie()
