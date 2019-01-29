@@ -7,6 +7,7 @@ target 'MoviesApps' do
 
   # Pods for MoviesApps
 	pod 'Moya'
+  pod 'Kingfisher'
 
-
+  
 end

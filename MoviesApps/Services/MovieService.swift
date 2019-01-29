@@ -10,45 +10,46 @@ import Foundation
 import Moya
 
 enum MovieService {
-    case readMovies
+    case fetchPopularMovies()
     
 }
 
 extension MovieService: TargetType {
     var baseURL: URL {
-        return URL (string: "https://api.themoviedb.org/3/movie/popular?api_key=ef9a756edb9f70a44409da35278888bd&language=en-US&page=1")!
+        return URL (string: "https://api.themoviedb.org/3")!
     }
     
     var path: String {
         switch self {
-        case .readMovies :
-            return "/movies"
+        case .fetchPopularMovies :
+            return "/movie/popular"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .readMovies :
+        case .fetchPopularMovies() :
             return .get
         }
     }
     
     var sampleData: Data {
-        switch self {
-        case .readMovies:
-            return Data()
-        }
+        return Data()
     }
     
     var task: Task {
         switch self {
-        case .readMovies:
-            return .requestPlain
+        case .fetchPopularMovies:
+            var params: [String: Any] = [:]
+            params["api_key"] = API_KEY
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-        return nil
+        return [:]
     }
     
     
