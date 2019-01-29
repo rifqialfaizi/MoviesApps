@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     var service = MovieDataService()
     var category = "Popular"
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
