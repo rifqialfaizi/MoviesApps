@@ -22,9 +22,6 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-
-        
         requestUpcomingMovies()
         requestPopularMovie()
         configureCollectionView()
@@ -51,6 +48,7 @@ class HomeViewController: UIViewController {
     }
     
     // TODO: Tambahin request untuk Latest, Now Playing & Top Rated Movie
+    // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Latest, NowPlaying & Top Rated
     
     func requestPopularMovie() {
         DispatchQueue.global(qos: .background).async {
@@ -58,6 +56,7 @@ class HomeViewController: UIViewController {
                 if status == true { // Jika status sukses(true)
                     self.movies = movies
                     self.collectionView.reloadData()
+                    self.configureUI(withTitle: "Popular 🎪")
                 } else { // Jika gagal
                     print("Gagal melakukan request")
                 }
@@ -71,8 +70,6 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
-                    
-                    
                 } else {
                     print("Gagal melakukan request Up coming")
                 }
@@ -108,11 +105,10 @@ class HomeViewController: UIViewController {
 }
     
     // TODO: Ubah title View Controller ketika user memilih kategori lainnya sesuai kategori saat ini
+    // TODO: Ubah nama fungsi configureUI menjadi nama yang merepresentasikan apa yang dilakukan fungsi tersebut
     
-    func configureUI() {
-        self.title = "\(category) 🎪"
-        self.title = "\(categoryUpcoming)"
-       
+    func configureUI(withTitle title: String) {
+        self.title = title
     }
 
     
