@@ -71,6 +71,8 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
+                    
+                    
                 } else {
                     print("Gagal melakukan request Up coming")
                 }
@@ -112,9 +114,7 @@ class HomeViewController: UIViewController {
         self.title = "\(categoryUpcoming)"
        
     }
- //   func configureUIUpcoming() {
-  //      self.title = "\(categoryUpcoming)"
-   // }
+
     
     func configureCollectionView() {
         collectionView.delegate = self
