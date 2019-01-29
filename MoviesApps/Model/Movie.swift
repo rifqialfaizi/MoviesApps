@@ -10,14 +10,14 @@ import Foundation
 
 struct Movies: Decodable {
     var page: Int?
-    var total_results: Int?
-    var total_pages: Int?
+    var totalResults: Int?
+    var totalPages: Int?
     var movies: [Movie]?
     
     enum CodingKeys: String, CodingKey {
         case page
-        case total_results
-        case total_pages
+        case totalResults = "total_results"
+        case totalPages = "total_pages"
         case movies = "results"
     }
 }
@@ -26,7 +26,12 @@ struct Movies: Decodable {
 struct Movie: Decodable {
     let id: Int?
     let title: String?
-    let poster_path: String?
-    let vote_average: Double?
+    let posterPath: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case posterPath = "poster_path"
+    }
 }
 

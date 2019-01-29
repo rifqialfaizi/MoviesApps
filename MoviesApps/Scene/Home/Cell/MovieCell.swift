@@ -22,7 +22,7 @@ class MovieCell: UICollectionViewCell {
     }
     
     func configure(with model: Movie) {
-        let posterImageUrl = "https://image.tmdb.org/t/p/w500/\(model.poster_path ?? "")"
+        let posterImageUrl = "https://image.tmdb.org/t/p/w500/\(model.posterPath ?? "")"
         let url = URL(string: posterImageUrl)
         moviePosterImageView.kf.setImage(with: url)
     }

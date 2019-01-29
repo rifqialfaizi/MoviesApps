@@ -22,11 +22,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         requestPopularMovie()
-        requestLatestMovie()
         configureCollectionView()
     }
 
-    // TODO: Tambahin action Button untuk merubah category lainnya yaitu Latest, Now Playing & Top Rated Movie
+    // TODO: Tambahin action Button untuk merubah category lainnya yaitu Upcoming, Now Playing & Top Rated Movie
     
     @IBAction func changeCategoryButton(_ sender: Any) {
         let alert = UIAlertController(title: "Choose Movies Category", message: "", preferredStyle: .actionSheet)
@@ -34,16 +33,9 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Popular", style: .default, handler: { _ in
             self.requestPopularMovie()
         }))
-        alert.addAction(UIAlertAction(title: "Latest", style: .default, handler: { _ in
-            self.requestLatestMovie()
+        alert.addAction(UIAlertAction(title: "Upcoming", style: .default, handler: { _ in
+            self.requestUpcomingMovies()
         }))
-        alert.addAction(UIAlertAction(title: "Now Playing", style: .default, handler: { _ in
-            self.requestPopularMovie()
-        }))
-        alert.addAction(UIAlertAction(title: "Top Rated", style: .default, handler: { _ in
-            self.requestPopularMovie()
-        }))
-        
         self.present(alert, animated: true)
     }
     
@@ -62,9 +54,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func requestLatestMovie() {
+    func requestUpcomingMovies() {
         DispatchQueue.global(qos: .background).async {
-            self.service.fetchLatestMovie { movies, status in
+            self.service.fetchUpcomingMovies { movies, status in
                 if status == true {
                 self.movies = movies
                 self.collectionView.reloadData()

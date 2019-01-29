@@ -11,48 +11,7 @@ import Moya
 
 enum MovieService {
     case fetchPopularMovies()
-}
-enum LatestMovies {
-    case fetchLatestMovies()
-}
-
-extension LatestMovies: TargetType {
-    var baseURL: URL {
-        return URL (string: "https://api.themoviedb.org/3")!
-    }
-    
-    var path: String {
-        switch self {
-        case .fetchLatestMovies:
-            return "/movie/latest"
-        }
-    }
-    
-    var method: Moya.Method {
-        switch self {
-        case .fetchLatestMovies:
-            return .get
-        }
-    }
-    
-    var sampleData: Data {
-        return Data()
-    }
-    
-    var task: Task {
-        switch self {
-        case .fetchLatestMovies:
-            var params: [String: Any] = [:]
-            params ["api_key"] = API_KEY
-            return .requestParameters(parameters: params, encoding: URLEncoding.default)
-        }
-    }
-    
-    var headers: [String : String]? {
-        return [:]
-    }
-    
-    
+    case fetchUpcomingMovies()
 }
 
 extension MovieService: TargetType {
@@ -64,12 +23,16 @@ extension MovieService: TargetType {
         switch self {
         case .fetchPopularMovies :
             return "/movie/popular"
+        case .fetchUpcomingMovies:
+            return "/movie/upcoming"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .fetchPopularMovies() :
+        case .fetchPopularMovies:
+            return .get
+        case .fetchUpcomingMovies:
             return .get
         }
     }
@@ -80,9 +43,17 @@ extension MovieService: TargetType {
     
     var task: Task {
         switch self {
+            
         case .fetchPopularMovies:
             var params: [String: Any] = [:]
             params["api_key"] = API_KEY
+            return .requestParameters(
+                parameters: params,
+                encoding: URLEncoding.default)
+            
+        case .fetchUpcomingMovies:
+            var params: [String: Any] = [:]
+            params ["api_key"] = API_KEY
             return .requestParameters(
                 parameters: params,
                 encoding: URLEncoding.default)
