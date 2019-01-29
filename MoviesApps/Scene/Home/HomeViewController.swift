@@ -49,14 +49,17 @@ class HomeViewController: UIViewController {
     }
     
     // TODO: Tambahin request untuk Upcoming, Now Playing & Top Rated Movie
-    // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Upcoming, NowPlaying & Top Rated
+    // Complete!
     
+    // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Upcoming, NowPlaying & Top Rated
+    // Complete!
     func requestPopularMovie() {
         DispatchQueue.global(qos: .background).async {
             self.service.fetchPopularMovie { movies, status in
                 if status == true { // Jika status sukses(true)
                     self.movies = movies
                     self.collectionView.reloadData()
+                    self.reloadCollectionViewWithAnimation()
                     self.configureUI(withTitle: "Popular 🎪")
                 } else { // Jika gagal
                     print("Gagal melakukan request")
@@ -109,6 +112,8 @@ class HomeViewController: UIViewController {
 }
     
     // TODO: Ubah title View Controller ketika user memilih kategori lainnya sesuai kategori saat ini
+    // Complete!
+    
     // TODO: Ubah nama fungsi configureUI menjadi nama yang merepresentasikan apa yang dilakukan fungsi tersebut
     
     func configureUI(withTitle title: String) {
@@ -130,7 +135,7 @@ class HomeViewController: UIViewController {
     
     /// Membuat animasi ketika reload collection view sehingga terlihat perbedaannya
     func reloadCollectionViewWithAnimation() {
-        UIView.transition(with: collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+        UIView.transition(with: collectionView, duration: 1.0, options: .transitionCurlUp, animations: {
             self.collectionView.reloadData()
         }, completion: nil)
     }
