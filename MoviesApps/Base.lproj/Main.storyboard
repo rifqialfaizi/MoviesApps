@@ -37,7 +37,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Nhh-av-Pse">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mn2-mu-edt">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="mn2-mu-edt">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -64,7 +64,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="g1Y-pM-ukl"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Zce-9a-L0z"/>
+                    <navigationItem key="navigationItem" id="Zce-9a-L0z">
+                        <barButtonItem key="rightBarButtonItem" title="Category" id="fse-wg-duz"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="Nhh-av-Pse" id="9Re-UG-kIY"/>
                     </connections>

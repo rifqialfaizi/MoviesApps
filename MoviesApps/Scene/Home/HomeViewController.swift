@@ -16,23 +16,30 @@ class HomeViewController: UIViewController {
     
     var movies = [Movie]()
     var service = MovieDataService()
+    var category = "Popular"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         requestPopularMovie()
-        configureCell()
+        configureCollectionView()
     }
 
     func requestPopularMovie() {
-        service.fetchPopularMovie { movies, status in
-            /// Jika status sukses(true)
-            if status == true {
-                self.movies = movies
-                self.collectionView.reloadData()
-            } else {
-                print("Gagal melakukan request")
+        DispatchQueue.global(qos: .background).async {
+            self.service.fetchPopularMovie { movies, status in
+                if status == true { // Jika status sukses(true)
+                    self.movies = movies
+                    self.collectionView.reloadData()
+                } else { // Jika gagal
+                    print("Gagal melakukan request")
+                }
             }
         }
+    }
+    
+    func configureUI() {
+        self.title = "\(category) 🎪"
     }
     
     func configureCollectionView() {
@@ -49,7 +56,14 @@ class HomeViewController: UIViewController {
    
 }
 
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenWidth = view.frame.width / 2
+        let screenHeight = view.frame.height / 2
+        return  CGSize(width: screenWidth, height: screenHeight) // Mengembalikan ukuran cell sesuai yang kita inginkan
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count // Mengembalikan jumlah movie yang diperoleh dari response
     }
