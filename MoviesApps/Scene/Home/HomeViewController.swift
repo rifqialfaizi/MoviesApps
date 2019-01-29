@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
         requestPopularMovie()
         configureCollectionView()
     }
-
+    
     // TODO: Tambahin action Button untuk merubah category lainnya yaitu Upcoming, Now Playing & Top Rated Movie
     
     @IBAction func changeCategoryButton(_ sender: Any) {
@@ -58,14 +58,16 @@ class HomeViewController: UIViewController {
         DispatchQueue.global(qos: .background).async {
             self.service.fetchUpcomingMovies { movies, status in
                 if status == true {
-                self.movies = movies
-                self.collectionView.reloadData()
+                    self.movies = movies
+                    self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
                 } else {
                     print("Gagal melakukan request Latest")
                 }
+            }
         }
     }
-}
+    
+    // TODO: Ubah title View Controller ketika user memilih kategori lainnya sesuai kategori saat ini
     
     func configureUI() {
         self.title = "\(category) 🎪"
@@ -82,7 +84,14 @@ class HomeViewController: UIViewController {
         let nib = UINib(nibName: MovieCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: MovieCell.reusableIdentifier)
     }
-   
+    
+    /// Membuat animasi ketika reload collection view sehingga terlihat perbedaannya
+    func reloadCollectionViewWithAnimation() {
+        UIView.transition(with: collectionView, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.collectionView.reloadData()
+        }, completion: nil)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
