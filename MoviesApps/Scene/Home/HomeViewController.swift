@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         requestPopularMovie()
+        requestLatestMovie()
         configureCollectionView()
     }
 
@@ -34,6 +35,12 @@ class HomeViewController: UIViewController {
             self.requestPopularMovie()
         }))
         alert.addAction(UIAlertAction(title: "Latest", style: .default, handler: { _ in
+            self.requestLatestMovie()
+        }))
+        alert.addAction(UIAlertAction(title: "Now Playing", style: .default, handler: { _ in
+            self.requestPopularMovie()
+        }))
+        alert.addAction(UIAlertAction(title: "Top Rated", style: .default, handler: { _ in
             self.requestPopularMovie()
         }))
         
@@ -54,6 +61,19 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    func requestLatestMovie() {
+        DispatchQueue.global(qos: .background).async {
+            self.service.fetchLatestMovie { movies, status in
+                if status == true {
+                self.movies = movies
+                self.collectionView.reloadData()
+                } else {
+                    print("Gagal melakukan request Latest")
+                }
+        }
+    }
+}
     
     func configureUI() {
         self.title = "\(category) 🎪"

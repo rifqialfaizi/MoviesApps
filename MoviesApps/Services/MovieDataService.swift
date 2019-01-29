@@ -12,6 +12,26 @@ class MovieDataService {
     
     //Plugin Network Logger untuk menampilkan log dari request
     let provider = MoyaProvider<MovieService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    let providerLatest = MoyaProvider<LatestMovies>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    
+    
+    func fetchLatestMovie(completion: @escaping(([Movie], Bool) -> ())) {
+        providerLatest.request(.fetchLatestMovies()) { result in
+            switch result {
+            case .success(let response):
+                guard let data = try? JSONDecoder().decode(Movies.self, from: response.data) as Movies else {
+                    completion([], false)
+                    return
+                }
+                
+                completion(data.movies ?? [], true)
+                
+            case .failure(let error):
+                completion([], false)
+                print(error.errorDescription ?? "")
+            }
+        }
+    }
 
     /// Escaping dipakai untuk memberitahu ketika request telah selesai dilakukan
     /// Tipe kembalian pertama [Movie] yang kita butuhkan adalah List dari Object Movie
