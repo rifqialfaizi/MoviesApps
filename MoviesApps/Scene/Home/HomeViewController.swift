@@ -33,6 +33,9 @@ class HomeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Popular", style: .default, handler: { _ in
             self.requestPopularMovie()
         }))
+        alert.addAction(UIAlertAction(title: "Latest", style: .default, handler: { _ in
+            self.requestPopularMovie()
+        }))
         
         self.present(alert, animated: true)
     }
