@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     }
     
     // TODO: Tambahin action Button untuk merubah category lainnya yaitu Upcoming, Now Playing & Top Rated Movie
+    // Completed!
     
     @IBAction func changeCategoryButton(_ sender: Any) {
         let alert = UIAlertController(title: "Choose Movies Category", message: "", preferredStyle: .actionSheet)
@@ -47,8 +48,8 @@ class HomeViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    // TODO: Tambahin request untuk Latest, Now Playing & Top Rated Movie
-    // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Latest, NowPlaying & Top Rated
+    // TODO: Tambahin request untuk Upcoming, Now Playing & Top Rated Movie
+    // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Upcoming, NowPlaying & Top Rated
     
     func requestPopularMovie() {
         DispatchQueue.global(qos: .background).async {
@@ -70,6 +71,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
+                    self.configureUI(withTitle: "Upcoming")
                 } else {
                     print("Gagal melakukan request Up coming")
                 }
@@ -83,6 +85,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation()
+                    self.configureUI(withTitle: "Now Playing")
                     
                 } else {
                     print("Gagal melakukan request Now Playing")
@@ -97,6 +100,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                 self.movies = movies
                 self.reloadCollectionViewWithAnimation()
+                    self.configureUI(withTitle: "Top Rated")
                 } else {
                     print("Gagal melakakukan request Top Rated")
                 }
