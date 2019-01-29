@@ -17,11 +17,15 @@ class HomeViewController: UIViewController {
     var movies = [Movie]()
     var service = MovieDataService()
     var category = "Popular"
-    
+    var categoryUpcoming = "Upcoming"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureUIUpcoming()
+        
+        requestUpcomingMovies()
         requestPopularMovie()
         configureCollectionView()
     }
@@ -36,6 +40,12 @@ class HomeViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Upcoming", style: .default, handler: { _ in
             self.requestUpcomingMovies()
+        }))
+        alert.addAction(UIAlertAction(title: "Now Playing", style: .default, handler: { _ in
+            self.requestNowPlayingMovies()
+        }))
+        alert.addAction(UIAlertAction(title: "Top Rated", style: .default, handler: { _ in
+            self.requestTopRatedMovies()
         }))
         self.present(alert, animated: true)
     }
@@ -62,16 +72,47 @@ class HomeViewController: UIViewController {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
                 } else {
-                    print("Gagal melakukan request Latest")
+                    print("Gagal melakukan request Up coming")
                 }
             }
         }
     }
     
+    func requestNowPlayingMovies() {
+        DispatchQueue.global(qos: .background).async {
+            self.service.fetchNowPlayingMovies { movies, status in
+                if status == true {
+                    self.movies = movies
+                    self.reloadCollectionViewWithAnimation()
+                    
+                } else {
+                    print("Gagal melakukan request Now Playing")
+                }
+            }
+        }
+    }
+    
+    func requestTopRatedMovies() {
+        DispatchQueue.global(qos: .background).async {
+            self.service.fetchTopRatedMovies { movies, status in
+                if status == true {
+                self.movies = movies
+                self.reloadCollectionViewWithAnimation()
+                } else {
+                    print("Gagal melakakukan request Top Rated")
+                }
+        }
+    }
+}
+    
     // TODO: Ubah title View Controller ketika user memilih kategori lainnya sesuai kategori saat ini
     
     func configureUI() {
         self.title = "\(category) 🎪"
+       
+    }
+    func configureUIUpcoming() {
+        self.title = "\(categoryUpcoming)"
     }
     
     func configureCollectionView() {
