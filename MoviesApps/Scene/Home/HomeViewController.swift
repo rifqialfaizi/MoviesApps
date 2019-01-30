@@ -160,5 +160,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil) // Mencari sotorybaord dengan nama MovieDetail.storyboard
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else { return } // Inisialiasasi view controller dengan identifier MovieDetailViewController pada MovieDetail.storyboard dan meng-casting nya dengan class MovieDetailViewController
+        controller.movieId = movies[indexPath.row].id // Memberikan ID dari Movie pada detail view controller agar bisa melakukan request dengan ID yang diinginkan
+        self.navigationController?.pushViewController(controller, animated: true) // Malakukan push view controller, pindah screen ke view detail
+    }
     
 }

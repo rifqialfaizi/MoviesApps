@@ -1,5 +1,5 @@
 //
-//  MovieDetailVC.swift
+//  MovieDetailViewController.swift
 //  MoviesApps
 //
 //  Created by Rifqi Alfaizi on 29/01/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailVC: UIViewController {
+class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
@@ -16,13 +16,15 @@ class MovieDetailVC: UIViewController {
     @IBOutlet weak var synopsis: UITextView!
     @IBOutlet weak var reviewBtnDidTap: UIButton!
     
-    
+    var movieId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     
+        print(movieId ?? 0)
     }
     
+    // TODO: Buat request untuk load detail movie dari API : base_url/movie/{movie_id}
+    // TODO: Tampilkan detail movie dari id yang telah disediakan di class ini (movieId)
+    // TODO: Buat tampilan sesuai yang ada di line
 
 }
