@@ -147,24 +147,32 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let screenWidth = view.frame.width / 2
         let screenHeight = view.frame.height / 2
-        return  CGSize(width: screenWidth, height: screenHeight) // Mengembalikan ukuran cell sesuai yang kita inginkan
+        /// Mengembalikan ukuran cell sesuai yang kita inginkan
+        return  CGSize(width: screenWidth, height: screenHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count // Mengembalikan jumlah movie yang diperoleh dari response
+        /// Mengembalikan jumlah movie yang diperoleh dari response
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.reusableIdentifier, for: indexPath) as? MovieCell else { return UICollectionViewCell() }
-        cell.configure(with: movies[indexPath.row]) // Mengirim object movie ke dalam cell
+        /// Mengirim object movie ke dalam cell
+        cell.configure(with: movies[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil) // Mencari sotorybaord dengan nama MovieDetail.storyboard
-        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else { return } // Inisialiasasi view controller dengan identifier MovieDetailViewController pada MovieDetail.storyboard dan meng-casting nya dengan class MovieDetailViewController
-        controller.movieId = movies[indexPath.row].id // Memberikan ID dari Movie pada detail view controller agar bisa melakukan request dengan ID yang diinginkan
-        self.navigationController?.pushViewController(controller, animated: true) // Malakukan push view controller, pindah screen ke view detail
+        /// Mencari sotorybaord dengan nama MovieDetail.storyboard
+        let storyboard = UIStoryboard(name: "MovieDetail", bundle: nil)
+        /// Inisialiasasi view controller dengan identifier MovieDetailViewController
+        /// pada MovieDetail.storyboard dan meng-casting nya dengan class MovieDetailViewController
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else { return }
+        /// Memberikan ID dari Movie pada detail view controller agar bisa melakukan request dengan ID yang diinginkan
+        controller.movieId = movies[indexPath.row].id
+        /// Malakukan push view controller, pindah screen ke view detail
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
 }
