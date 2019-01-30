@@ -14,6 +14,7 @@ enum MovieService {
     case fetchUpcomingMovies()
     case fetchNowPlayingMovies()
     case fetchTopRatedMovies()
+    case fetchMovieDetail()
 }
 
 extension MovieService: TargetType {
@@ -31,6 +32,8 @@ extension MovieService: TargetType {
             return "/movie/now_playing"
         case .fetchTopRatedMovies:
             return "/movie/top_rated"
+        case .fetchMovieDetail :
+            return "/movie/{movie_id}"
         }
     }
     
@@ -44,7 +47,8 @@ extension MovieService: TargetType {
             return .get
         case .fetchTopRatedMovies:
             return .get
-            
+        case .fetchMovieDetail:
+            return .get
         }
     }
     
@@ -80,6 +84,13 @@ extension MovieService: TargetType {
             return .requestParameters(
                 parameters: params,
                 encoding: URLEncoding.default)
+        case .fetchMovieDetail:
+            var params: [String: Any] = [:]
+            params ["api_key"] = API_KEY
+            return .requestParameters(
+                parameters: params,
+            encoding: URLEncoding.default)
+          
         }
     }
     

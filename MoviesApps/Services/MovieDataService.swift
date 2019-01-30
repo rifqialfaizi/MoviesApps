@@ -13,6 +13,22 @@ class MovieDataService {
     //Plugin Network Logger untuk menampilkan log dari request
     let provider = MoyaProvider<MovieService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
+    func fetchMovieDetail(completion: @escaping(([Movie], Bool) -> ())) {
+        provider.request(.fetchMovieDetail()) { result in
+            switch result {
+            case .success(let response):
+                guard let data = try? JSONDecoder().decode(Movies.self, from: response.data) as Movies else {
+                    completion([], false)
+                    return
+                }
+                completion(data.movies ?? [], true)
+            case .failure(let error):
+                completion([], false)
+                print(error.errorDescription ?? "")
+            }
+        }
+    }
+    
     func fetchTopRatedMovies(completion: @escaping(([Movie], Bool) -> ())) {
         provider.request(.fetchTopRatedMovies()){ result in
             switch result {

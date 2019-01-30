@@ -17,12 +17,11 @@ class HomeViewController: UIViewController {
     var movies = [Movie]()
     var service = MovieDataService()
     var category = "Popular"
-    var categoryUpcoming = "Upcoming"
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestUpcomingMovies()
         requestPopularMovie()
         configureCollectionView()
     }
@@ -53,6 +52,21 @@ class HomeViewController: UIViewController {
     
     // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Upcoming, NowPlaying & Top Rated
     // Complete!
+  
+    func requestMovieDetail() {
+        DispatchQueue.global(qos: .background).async {
+            self.service.fetchMovieDetail { movies, status in
+                if status == true {
+                    self.movies = movies
+                } else {
+                    print("Gagal melakukan request")
+                }
+            }
+        }
+    }
+
+    
+    
     func requestPopularMovie() {
         DispatchQueue.global(qos: .background).async {
             self.service.fetchPopularMovie { movies, status in
@@ -60,7 +74,7 @@ class HomeViewController: UIViewController {
                     self.movies = movies
                     self.collectionView.reloadData()
                     self.reloadCollectionViewWithAnimation()
-                    self.configureUI(withTitle: "Popular 🎪")
+                    self.configureTitle(withTitle: "Popular 🎪")
                 } else { // Jika gagal
                     print("Gagal melakukan request")
                 }
@@ -74,7 +88,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation() // Melakukan reload data dengan animasi
-                    self.configureUI(withTitle: "Upcoming")
+                    self.configureTitle(withTitle: "Upcoming")
                 } else {
                     print("Gagal melakukan request Up coming")
                 }
@@ -88,7 +102,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                     self.movies = movies
                     self.reloadCollectionViewWithAnimation()
-                    self.configureUI(withTitle: "Now Playing")
+                    self.configureTitle(withTitle: "Now Playing")
                     
                 } else {
                     print("Gagal melakukan request Now Playing")
@@ -103,7 +117,7 @@ class HomeViewController: UIViewController {
                 if status == true {
                 self.movies = movies
                 self.reloadCollectionViewWithAnimation()
-                    self.configureUI(withTitle: "Top Rated")
+                    self.configureTitle(withTitle: "Top Rated")
                 } else {
                     print("Gagal melakakukan request Top Rated")
                 }
@@ -115,8 +129,9 @@ class HomeViewController: UIViewController {
     // Complete!
     
     // TODO: Ubah nama fungsi configureUI menjadi nama yang merepresentasikan apa yang dilakukan fungsi tersebut
+    // Complete!
     
-    func configureUI(withTitle title: String) {
+    func configureTitle(withTitle title: String) {
         self.title = title
     }
 
