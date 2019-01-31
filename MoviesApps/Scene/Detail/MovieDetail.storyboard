@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Thor" translatesAutoresizingMaskIntoConstraints="NO" id="pqk-Ga-TIe">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pqk-Ga-TIe">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="posterImage" destination="pqk-Ga-TIe" id="TrE-JI-6L1"/>
                         <outlet property="synopsis" destination="Qgs-Qr-Wpf" id="MbK-8X-bh4"/>
+                        <outlet property="titleMovie" destination="wIK-Qx-G6T" id="fJU-rB-B1v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuw-oJ-Hj9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,7 +66,4 @@
             <point key="canvasLocation" x="341.60000000000002" y="-255.02248875562222"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Thor" width="1280" height="1920"/>
-    </resources>
 </document>

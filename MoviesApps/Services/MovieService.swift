@@ -14,7 +14,9 @@ enum MovieService {
     case fetchUpcomingMovies()
     case fetchNowPlayingMovies()
     case fetchTopRatedMovies()
-    case fetchMovieDetail()
+    
+    /// Mengirim parameter untuk memanggil request ke API sesuai dengan apa yang diisi
+    case fetchMovieDetail(id : Int)
 }
 
 extension MovieService: TargetType {
@@ -32,8 +34,9 @@ extension MovieService: TargetType {
             return "/movie/now_playing"
         case .fetchTopRatedMovies:
             return "/movie/top_rated"
-        case .fetchMovieDetail :
-            return "/movie/{movie_id}"
+        /// let id untuk mengakses data yang dikirim di parameter
+        case let .fetchMovieDetail(id) :
+            return "/movie/\(id)"
         }
     }
     

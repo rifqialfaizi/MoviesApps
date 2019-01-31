@@ -53,21 +53,7 @@ class HomeViewController: UIViewController {
     // TODO: Tambah animasi untuk semua request ketika selesai di Popular, Upcoming, NowPlaying & Top Rated
     // Complete!
   
-    func requestMovieDetail() {
-        DispatchQueue.global(qos: .background).async {
-            self.service.fetchMovieDetail { movies, status in
-                if status == true {
-                    self.movies = movies
-                    self.collectionView.reloadData()
-                    self.reloadCollectionViewWithAnimation()
-                    self.configureTitle(withTitle: "Movie Review")
-                } else {
-                    print("Gagal melakukan request")
-                }
-            }
-        }
-    }
-
+    
     
     
     func requestPopularMovie() {
