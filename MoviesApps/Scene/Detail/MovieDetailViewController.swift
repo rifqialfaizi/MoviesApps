@@ -48,7 +48,7 @@ class MovieDetailViewController: UIViewController {
     private func movieDetail() {
         guard let movies = movies, let url = URL(string: "https://api.themoviedb.org/3/movie/{\(movieId)}") else {return}
         let resource = ImageResource(downloadURL: url, cacheKey: movies.title)
-        posterImage.kf.setImage(with: resource )
+        posterImage.image = movies.posterPath //error karna posterPath adalah String. lalu bagaimana?
         titleMovie.text = movies.title
         synopsis.text = movies.overView
         
