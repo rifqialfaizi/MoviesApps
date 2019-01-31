@@ -19,8 +19,8 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleMovie: UILabel!
     @IBOutlet weak var synopsis: UITextView!
-    @IBOutlet weak var dateReleased: UILabel!
-    @IBOutlet weak var reviewBtnDidTap: UIButton!
+    @IBOutlet weak var releaseDate: UILabel!
+    
     
     var service = MovieDataService()
     var movieId: Int?
@@ -47,7 +47,7 @@ class MovieDetailViewController: UIViewController {
     // Complete!
     
     func requestMovieDetail() {
-        /// mengakses movieId dengan guard agar type safe, sehinggal ketika movieId bernilai nil fungsi akan berhenti sampai sini
+        /// mengakses movieId dengan guard agar type safe, sehingga ketika movieId bernilai nil fungsi akan berhenti sampai sini
         guard let id = self.movieId else { return }
         self.service.fetchMovieDetail(withId: id, completion: { movie, status in
             if status == true {
@@ -71,6 +71,7 @@ class MovieDetailViewController: UIViewController {
         
         titleMovie.text = movie.title
         synopsis.text = movie.overview
+        releaseDate.text = movie.release_date // added
         
     }
     
