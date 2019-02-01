@@ -15,11 +15,13 @@ class MovieDetailViewController: UIViewController {
     /// Ubah nama variable ditambahi dengan jenis namanya
     
     // TODO: ubah posterImage menjadi posterImageView, titleMovie menjadi titleMovieLablel dst...
+    // Complete!
     
-    @IBOutlet weak var posterImage: UIImageView!
-    @IBOutlet weak var titleMovie: UILabel!
-    @IBOutlet weak var synopsis: UITextView!
-    @IBOutlet weak var releaseDate: UILabel!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var titleMovieLabel: UILabel!
+    @IBOutlet weak var synopsisTextView: UITextView!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var reviewBtn: UIButton!
     
     
     var service = MovieDataService()
@@ -28,15 +30,19 @@ class MovieDetailViewController: UIViewController {
     /// Nama variable harus merepresentasikan isinya, kalau movies itu artinya jamak berarti lebih dari 1
     /// biasanya dalam bentuk array seperti movies: [Movies] padahal movie detail hanya ada 1 movie aja
     // TODO: Ubah nama movies jadi movie karna movie bentuknya bukan jamak/array
-    var movies: Movie? {
+    // Complete!
+    
+ 
+    var movie: Movie? {
         didSet{
-            self.movieDetail()
+            self.setMovieDetailView()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         requestMovieDetail()
+        setUpNavBarTitle()
     }
     
     // TODO: Buat request untuk load detail movie dari API : base_url/movie/{movie_id}
@@ -51,7 +57,7 @@ class MovieDetailViewController: UIViewController {
         guard let id = self.movieId else { return }
         self.service.fetchMovieDetail(withId: id, completion: { movie, status in
             if status == true {
-                self.movies = movie
+                self.movie = movie
             } else {
                 print("Gagal melakukan request")
             }
@@ -61,23 +67,50 @@ class MovieDetailViewController: UIViewController {
 
     // TODO: Ubah nama fungsi sesuai dengan tugasnya
     /// Ubah nama dari fungsi movieDetail() menjadi setMovieDetailView()
-    private func movieDetail() {
+    // Complete!
+    
+    private func setMovieDetailView() {
         /// Akses variable movie, kenapa pake guard ? karena movie tipenya optional, ketika error akan STOP disini
-        guard let movie = movies else { return }
+        guard let movie = movie else { return }
         
         let url = URL(string: movie.posterPath?.imagePathToUrl() ?? "") // Kenapa ada "??" artinya memberikan nilai default string kosong ketika posterPath bernilai nil
-        posterImage.kf.setImage(with: url) // Set image ke ImageView dengan Library Kingfisher, sudah otomatis
-        posterImage.kf.indicatorType = .activity // memberikan animasi sctivity indicator ketika sedang load image ke server
+        posterImageView.kf.setImage(with: url) // Set image ke ImageView dengan Library Kingfisher, sudah otomatis
+        posterImageView.kf.indicatorType = .activity // memberikan animasi sctivity indicator ketika sedang load image ke server
         
-        titleMovie.text = movie.title
-        synopsis.text = movie.overview
-        releaseDate.text = movie.release_date // added
+        titleMovieLabel.text = movie.title
+        synopsisTextView.text = movie.overview
+        releaseDateLabel.text = movie.release_date // added
         
     }
     
     // TODO: Ubah title view controller sesuai dengan judul film
+    // Complete but failed
     // TODO: Tambahkan button review untuk melihat daftar review dari movie detail
     
+    private func setUpNavBarTitle() {
+        
+        guard let title = movie else { return }
+        
+        self.navigationItem.title = title.title // kenapa dia nil? kalau misalkan code nya seperti ini:
+        
+        // private func setUpNavBarTitle() {
+        
+        // self.navigationItem.title = movie?.title // nantinya tidak ada apa2. jika seperti ini:
+        // self.navigationItem.title = "\(movie?.title)" // nantinya title menjadi bertuliskan ( nil )
+        
+}
+    
+    
+    @IBAction func reviewBtnWasPressed(_ sender: Any) {
+       
+        guard let controller = storyboard!.instantiateViewController(withIdentifier: "MovieReviewController") as? MovieReviewController else { return }
+        
+        controller.movieId = movie?.id
+        
+        self.navigationController?.pushViewController(controller, animated: true)
+        
+        
+    }
     
     
 }
