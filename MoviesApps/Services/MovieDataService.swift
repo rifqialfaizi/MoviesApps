@@ -16,11 +16,11 @@ class MovieDataService {
     
     /// Menambahkan parameter id untuk memanggil request ke API
     
-    func fetchMovieReview(withId id: Int, completion: @escaping((Movie?, Bool) -> ())) {
+    func fetchMovieReview(withId id: Int, completion: @escaping((Review?, Bool) -> ())) {
         provider.request(.fetchMovieReview(id: id)) { result in
             switch result {
             case .success(let response):
-                guard let data = try? JSONDecoder().decode(Movie.self, from: response.data) as Movie else {
+                guard let data = try? JSONDecoder().decode(Review.self, from: response.data) as Review else {
                     completion(nil, false)
                     return
                 }

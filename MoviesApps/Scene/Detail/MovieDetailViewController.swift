@@ -99,17 +99,15 @@ class MovieDetailViewController: UIViewController {
         // self.navigationItem.title = "\(movie?.title)" // nantinya title menjadi bertuliskan ( nil )
         
 }
-    
-    
     @IBAction func reviewBtnWasPressed(_ sender: Any) {
+        
+        let storyboard = UIStoryboard(name: "MovieReview", bundle: nil)
        
-        guard let controller = storyboard!.instantiateViewController(withIdentifier: "MovieReviewController") as? MovieReviewController else { return }
+        guard let controller = storyboard.instantiateViewController(withIdentifier: "MovieReviewController") as? MovieReviewController else { return }
         
         controller.movieId = movie?.id
         
         self.navigationController?.pushViewController(controller, animated: true)
-        
-        
     }
     
     

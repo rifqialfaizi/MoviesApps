@@ -15,11 +15,17 @@ class ReviewCell: UITableViewCell {
     @IBOutlet weak var authorsLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
     
-    func updateView(_ authors: String, _ content: String) {
-        contentTextView.text = content
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
-
-   
+    
+    func configureReviewCell(with model: Review) {
+        authorsLabel.text = model.author
+        contentTextView.text = model.content
+      
+    }
+ 
     }
 
     

@@ -9,18 +9,8 @@
 import UIKit
 
 class MovieReviewController: UIViewController {
-
-    
-    
     @IBOutlet weak var reviewTableView: UITableView!
-    
-    @IBOutlet weak var authorsLabel: UILabel!
-    @IBOutlet weak var contentTextView: UITextView!
-    
-    
-    
-    
-    var movieReviews = [Review]()
+  //  var movieReviews = [Review]()
     
     var service = MovieDataService()
     var movieId: Int?
@@ -31,20 +21,24 @@ class MovieReviewController: UIViewController {
     }
     
 
-    
+    var review: Review? {
+        didSet{
+            self.setMovieReviewView()
+        }
+    }
     
     var movie: Movie? {
         didSet{
-            self.setMovieDetailView()
+            self.setMovieReviewView()
         }
     }
     
     func requestMovieReview() {
         /// mengakses movieId dengan guard agar type safe, sehingga ketika movieId bernilai nil fungsi akan berhenti sampai sini
         guard let id = self.movieId else { return }
-        self.service.fetchMovieReview(withId: id, completion: { movie, status in
+        self.service.fetchMovieReview(withId: id, completion: { review, status in
             if status == true {
-                self.movie = movie
+                self.review = review
             } else {
                 print("Gagal melakukan request")
             }
@@ -52,9 +46,10 @@ class MovieReviewController: UIViewController {
     }
     
     
-    private func setMovieDetailView() {
+    private func setMovieReviewView() {
         /// Akses variable movie, kenapa pake guard ? karena movie tipenya optional, ketika error akan STOP disini
-        guard let movie = movie else { return }
+        guard let review = review else { return }
+        
         
     }
     
@@ -62,12 +57,14 @@ class MovieReviewController: UIViewController {
 
 extension MovieReviewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movieReviews.count
+        return review.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: "ReviewCell") as? ReviewCell else { return ReviewCell()}
-      //  cell.updateView(movieReviews[indexPath.row].author, movieReviews[indexPath.row].content)
+        guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: "reviewCell") as? ReviewCell else { return ReviewCell()}
+      //  let review = review[indexPath.row]
+        cell.configureReviewCell(with: review?.author)
+        cell.configureReviewCell(with: review?.content)
         return cell
     }
 
