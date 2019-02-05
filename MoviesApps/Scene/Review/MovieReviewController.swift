@@ -62,9 +62,9 @@ extension MovieReviewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: "reviewCell") as? ReviewCell else { return ReviewCell()}
-      //  let review = review[indexPath.row]
-        cell.configureReviewCell(with: review?.author)
-        cell.configureReviewCell(with: review?.content)
+        let review = review[indexPath.row]
+        cell.configureReviewCell(with: review)
+        cell.configureReviewCell(with: review)
         return cell
     }
 

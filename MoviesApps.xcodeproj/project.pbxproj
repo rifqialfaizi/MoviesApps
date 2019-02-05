@@ -146,6 +146,7 @@
 		07B88E782204369A000F4DCE /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				F47F16A12209546200A8C157 /* Cell */,
 				07B88E79220436C0000F4DCE /* MovieReviewController.swift */,
 				07B88E7B220436F9000F4DCE /* MovieReview.storyboard */,
 			);
@@ -204,6 +205,13 @@
 				F47F169F22027B1D00A8C157 /* String+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F47F16A12209546200A8C157 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
