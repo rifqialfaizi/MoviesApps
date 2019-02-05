@@ -27,6 +27,7 @@ class MovieReviewController: UIViewController {
         }
     }
     
+    // TODO: Gaperlu ada object movie karena kita hanya ingin menampilkan review saja tanpa detail filmnya
     var movie: Movie? {
         didSet{
             self.setMovieReviewView()
