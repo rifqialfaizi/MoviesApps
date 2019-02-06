@@ -143,9 +143,18 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		072A63CE220ABA3F00E2CD85 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				07B88E7D22047EC0000F4DCE /* ReviewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		07B88E782204369A000F4DCE /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				072A63CE220ABA3F00E2CD85 /* Cell */,
 				07B88E79220436C0000F4DCE /* MovieReviewController.swift */,
 				07B88E7B220436F9000F4DCE /* MovieReview.storyboard */,
 			);
@@ -193,7 +202,6 @@
 			children = (
 				F47F169821FFFDF400A8C157 /* MovieCell.swift */,
 				F47F169921FFFDF400A8C157 /* MovieCell.xib */,
-				07B88E7D22047EC0000F4DCE /* ReviewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
