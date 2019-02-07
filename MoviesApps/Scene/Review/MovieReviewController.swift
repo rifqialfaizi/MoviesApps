@@ -11,11 +11,10 @@ import UIKit
 class MovieReviewController: UIViewController {
     
     
-       var review = [Review]()
+       var reviews = [Review]()
     
     
     @IBOutlet weak var reviewTableView: UITableView!
-  //  var movieReviews = [Review]()
     
     var service = MovieDataService()
     var movieId: Int?
@@ -23,12 +22,6 @@ class MovieReviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestMovieReview()
-    }
-
-    var review: Review? {
-        didSet{
-            self.setMovieReviewView()
-        }
     }
     
     // TODO: Gaperlu ada object movie karena kita hanya ingin menampilkan review saja tanpa detail filmnya
@@ -43,25 +36,29 @@ class MovieReviewController: UIViewController {
         guard let id = self.movieId else { return }
         self.service.fetchMovieReview(withId: id, completion: { review, status in
             if status == true {
-                self.review = review
+                self.reviews = review
             } else {
                 print("Gagal melakukan request")
             }
         })
     }
     
+    func setMovieReviewView() {
+        
+    }
+    
 }
 
 extension MovieReviewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return review.count
+        return reviews.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = reviewTableView.dequeueReusableCell(withIdentifier: "reviewCell", for: indexPath) as? ReviewCell else { return ReviewCell()}
        
         
-        cell.configureReviewCell(with: review[indexPath.row].author)
+        cell.configureReviewCell(with: reviews[indexPath.row])
         
         
         return cell
