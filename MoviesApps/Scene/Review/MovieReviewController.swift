@@ -9,6 +9,11 @@
 import UIKit
 
 class MovieReviewController: UIViewController {
+    
+    
+       var review = [Review]()
+    
+    
     @IBOutlet weak var reviewTableView: UITableView!
   //  var movieReviews = [Review]()
     
@@ -19,7 +24,6 @@ class MovieReviewController: UIViewController {
         super.viewDidLoad()
         requestMovieReview()
     }
-    
 
     var review: Review? {
         didSet{
@@ -44,14 +48,6 @@ class MovieReviewController: UIViewController {
                 print("Gagal melakukan request")
             }
         })
-    }
-    
-    
-    private func setMovieReviewView() {
-        /// Akses variable movie, kenapa pake guard ? karena movie tipenya optional, ketika error akan STOP disini
-        guard let review = review else { return }
-        
-        
     }
     
 }
