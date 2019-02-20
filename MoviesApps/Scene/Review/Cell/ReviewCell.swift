@@ -10,10 +10,15 @@ import UIKit
 
 class ReviewCell: UITableViewCell {
     
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var reviewTextView: UITextView!
+    
+    
     static let identifier = "ReviewCell"
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
     }
 
@@ -24,6 +29,8 @@ class ReviewCell: UITableViewCell {
     }
     
     func configureReviewCell(with review: Review) {
+        authorLabel.text = review.author
+        reviewTextView.text = review.content
         
     }
     

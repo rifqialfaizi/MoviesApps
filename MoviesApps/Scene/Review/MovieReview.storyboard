@@ -45,10 +45,6 @@
                                                 </textView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="authorsLabel" destination="IQJ-am-Vf3" id="UqB-uO-es7"/>
-                                            <outlet property="contentTextView" destination="8Py-Gy-iao" id="icR-WK-e1a"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

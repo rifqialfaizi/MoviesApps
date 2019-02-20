@@ -28,11 +28,13 @@ struct Review: Decodable {
     let id: Int?
     let author: String?
     let content: String?
+    let url: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case author
         case content
+        case url
 
         
     }
